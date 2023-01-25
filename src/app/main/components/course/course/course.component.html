@@ -1,0 +1,207 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center">
+          <mat-card>
+              <mat-card-subtitle class="mb-2">
+                  <div class="d-sm-flex align-items-center justify-content-between">
+                     List Of Available course
+                      <div>
+                          <strong>Optional Course: <span class="badge bg-primary badge-pill"
+                                  style="font-size: medium;">{{totalRemain}}</span></strong>
+                      </div>
+
+    <button mat-raised-button color="primary"  (click)="openDialog()"style="float: right;">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Register New Course.
+      </button>
+
+
+  
+</div>
+
+                
+              </mat-card-subtitle>
+              <mat-divider inset></mat-divider>
+              <mat-card-content>
+                  <!-- <mat-form-field appearance="outline">
+                      <mat-label>Search</mat-label>
+                      <input matInput (keyup)="applyCardFilter($event)" placeholder="Search..." #input>
+                  </mat-form-field> -->
+                  <div class="mat-elevation-z8 text-left">
+                      <table mat-table [dataSource]="cardDataSource" matSort>
+                          <ng-container matColumnDef="ID">
+                              <th mat-header-cell *matHeaderCellDef mat-tableSort-header>
+                                  S/N
+                              </th>
+                              <td mat-cell *matCellDef="let row;let i=index">
+                                  {{i+1}}
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="title">
+                              <th mat-header-cell *matHeaderCellDef mat-cardSort-header>
+                             Course Title
+                              </th>
+                              <td mat-cell *matCellDef="let row">
+                                  <img class="img-thumbnail rounded" style="max-height: 50px;" src="assets/images/1.png" alt="">
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="cscode">
+                              <th mat-header-cell *matHeaderCellDef mat-cardSort-header>
+                                  Course Code
+                              </th>
+                              <td mat-cell *matCellDef="let row">
+                                 <span class="float-right badge bg-success badge-pill mr-3" style="font-size: medium;">{{row.quantity}}</span>
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="unit">
+                              <th mat-header-cell *matHeaderCellDef mat-cardSort-header>
+                               Unit
+                              </th>
+                              <td mat-cell *matCellDef="let row">
+                                 
+                                  <span *ngIf="!row.isTakeaway">at </span>
+                                  <span class="badge bg-primary mr-3" *ngIf="row.isTakeaway" style="font-size: 13px;">Take away</span>
+                              </td>
+                          </ng-container>
+                          <ng-container matColumnDef="scope">
+                            <th mat-header-cell *matHeaderCellDef mat-cardSort-header>
+                          Course Scope
+                            </th>
+                            <td mat-cell *matCellDef="let row">
+                               
+                                <span *ngIf="!row.isTakeaway">at </span>
+                                <span class="badge bg-primary mr-3" *ngIf="row.isTakeaway" style="font-size: 13px;">Take away</span>
+                            </td>
+                        </ng-container>
+                        
+                        <ng-container matColumnDef="lecturer">
+                            <th mat-header-cell *matHeaderCellDef mat-cardSort-header>
+                        Lecturer
+                            </th>
+                            <td mat-cell *matCellDef="let row">
+                               
+                                <span *ngIf="!row.isTakeaway">at </span>
+                                <span class="badge bg-primary mr-3" *ngIf="row.isTakeaway" style="font-size: 13px;">Take away</span>
+                            </td>
+                        </ng-container>
+                        <ng-container matColumnDef="program">
+                          <th mat-header-cell *matHeaderCellDef mat-cardSort-header>
+                     Program.
+                          </th>
+                          <td mat-cell *matCellDef="let row">
+                             
+                              <span *ngIf="!row.isTakeaway">at </span>
+                              <span class="badge bg-primary mr-3" *ngIf="row.isTakeaway" style="font-size: 13px;">Take away</span>
+                          </td>
+                      </ng-container>
+                        
+                          <ng-container matColumnDef="status">
+                              <th mat-header-cell *matHeaderCellDef mat-tableSort-header>
+                       
+                              </th>
+                              <td mat-cell *matCellDef="let row">
+                                  <span class="badge bg-success" *ngIf="!row.isTakeaway" style="font-size: 13px;">Dine
+                                      In</span>
+                                  <span class="badge bg-primary" *ngIf="row.isTakeaway" style="font-size: 13px;">Take
+                                      Away</span>
+                              </td>
+                          </ng-container>
+                          <tr mat-header-row *matHeaderRowDef="cardColumns"></tr>
+                          <tr mat-row *matRowDef="let row; columns: cardColumns"></tr>
+                          <tr class="mat-row" *matNoDataRow>
+                              <td class="mat-cell" colspan="4">No data matching the filter</td>
+                          </tr>
+                      </table>
+                      <mat-paginator [pageSizeOptions]="[25, 50]" aria-label="Select page of tables">
+                      </mat-paginator>
+                  </div>
+              </mat-card-content>
+              <mat-card-footer>
+                  <mat-progress-bar *ngIf="tableProgress" mode="indeterminate"></mat-progress-bar>
+              </mat-card-footer>
+          </mat-card>
+      </div>
+  </div>
+</div>
+
+
+
+    <ng-template #callDialog>
+    <form  #form="ngForm">
+      <h4>Add New Course</h4><br>
+
+            <div class="row">
+
+          
+                <div class="col-sm-6">
+                  <mat-form-field id="mat-form-field">
+                    <mat-label>Course Title </mat-label>
+
+                    <input matInput type="text" placeholder="Ex. Computer Archtecture" id="sneg"
+                      formControlName="sneg" name="sneg" required />
+                    <mat-hint align="end"></mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field id="mat-form-field">
+                    <mat-label>Course Code </mat-label>
+                    <input matInput type="text" placeholder="Ex. CS1102" id="lifeJacket"
+                      formControlName="lifeJacket" name="lifeJacket" required />
+                    <mat-hint align="end"></mat-hint>
+                  </mat-form-field>
+                </div >
+              </div >
+                <div class="row">
+                <div class="col-sm-6">
+                    <mat-form-field id="mat-form-field">
+                     <mat-label>Course Scope</mat-label>
+                      <input matInput type="text" placeholder="Ex.  Number Representation" id="sneb"
+                        formControlName="sneb" name="sneb" required />
+                      <mat-hint align="end"></mat-hint>
+                    </mat-form-field>
+                  </div>
+             
+            
+                <div class="col-sm-6">
+                  <mat-form-field id="mat-form-field">
+                    <mat-label>Unit</mat-label>
+                    <input matInput type="text" placeholder="Ex. 10" id="sneb"
+                      formControlName="sneb" name="sneb" required />
+                    <mat-hint align="end"></mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <mat-form-field id="mat-form-field">
+                    <mat-label></mat-label>
+                    <mat-label>Lecture</mat-label>
+                    <input matInput type="text" placeholder="Ex. Dr Ali Adnan" id="sneg"
+                      formControlName="sneg" name="sneg" required />
+                    <mat-hint align="end"></mat-hint>
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-6">
+                  <mat-form-field id="mat-form-field">
+                    <mat-label>program</mat-label>
+                    <input matInput type="text" placeholder="Ex. BCS" id="lifeJacket"
+                      formControlName="lifeJacket" name="lifeJacket" required />
+                    <mat-hint align="end"></mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-12">
+                  <mat-dialog-actions align="end">
+                    <button type="button" matDialogClose="no" class="btn btn-light">Cancel</button>
+                    &nbsp;&nbsp;
+                    <button type="submit" matDialogClose="no" class="btn btn-primary"  id="register">
+                     Save Course.
+                    </button>
+                  </mat-dialog-actions>
+                </div>
+              </div>
+    </form>
+</ng-template>
+

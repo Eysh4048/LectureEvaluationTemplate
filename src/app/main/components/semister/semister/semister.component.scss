@@ -1,0 +1,39 @@
+table {
+    width: 100%;
+  }
+  
+  #div {
+    margin: 10px 10px 10px 0px;
+  }
+  
+  .mat-form-field {
+    font-size: 18px;
+    width: 10%;
+  }
+  
+  #mat-form-field {
+    width: 320px !important;
+  }
+  
+  #mat-form-select {
+    width: 330px !important
+  }
+  
+  #btn {
+    width: 70px;
+    margin: 5px;
+  }
+  
+  .mat-blue {
+    background-color: #117A8B;
+    color: #fff;
+    float: right;
+    margin: 0px 3px;
+  }
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  .example-section {
+    margin: 12px 0;
+  }
+  
